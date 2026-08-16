@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -111,13 +112,19 @@ export function Hero({ id }: { id?: string }) {
             className="lg:col-span-6 relative flex flex-col items-center lg:items-end justify-center w-full mt-12 lg:mt-0 lg:pr-4"
           >
             <div className="relative w-[280px] sm:w-[320px] aspect-[4/5] rounded-3xl overflow-hidden flex items-center justify-center bg-secondary/30 border border-border shadow-sm p-3">
-              <div className="w-full h-full rounded-2xl bg-background border border-border/60 relative overflow-hidden flex items-center justify-center">
+              <div className="w-full h-full rounded-2xl bg-background border border-border/60 relative overflow-hidden flex items-end justify-center pt-8 bg-gradient-to-b from-secondary/50 to-background">
                 {/* Minimal elegant pattern */}
                 <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(var(--foreground) 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}></div>
                 
-                {/* Subtle abstract focal point */}
-                <div className="w-20 h-20 rounded-full border border-primary/10 bg-primary/5 flex items-center justify-center backdrop-blur-sm z-10 shadow-inner">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20"></div>
+                <div className="relative w-full h-full z-10 mt-6">
+                  <Image
+                    src="/images/profile_nobg.png"
+                    alt="Karthik Golla"
+                    fill
+                    priority
+                    className="object-contain object-bottom drop-shadow-xl scale-[1.02]"
+                    sizes="(max-width: 768px) 280px, 320px"
+                  />
                 </div>
               </div>
             </div>
