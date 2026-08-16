@@ -124,7 +124,7 @@ export function Navbar() {
         {/* Right CTA Button (Desktop) */}
         <div className="hidden md:flex items-center">
           <a
-            href="/resume.pdf"
+            href="/Karthik_Golla_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm px-5 py-2.5 rounded-md transition-all duration-200"
@@ -137,7 +137,7 @@ export function Navbar() {
         {/* Mobile Hamburger & Resume Actions */}
         <div className="flex md:hidden items-center gap-3">
           <a
-            href="/resume.pdf"
+            href="/Karthik_Golla_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 bg-primary text-primary-foreground font-medium text-xs px-3 py-1.5 rounded-md transition-all"

@@ -72,9 +72,8 @@ export function Hero({ id }: { id?: string }) {
               </Link>
               
               <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/Karthik_Golla_Resume.pdf"
+                download="Karthik_Golla_Resume.pdf"
                 className="inline-flex items-center justify-center gap-2 border border-border hover:border-muted-foreground bg-transparent hover:bg-muted text-foreground font-medium text-sm px-8 py-4 rounded-md transition-all duration-200"
               >
                 <Download size={16} />
