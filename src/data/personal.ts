@@ -3,7 +3,7 @@ export const personalInfo = {
   role: "AI Engineer | Python Backend Developer",
   avatar: "/images/profile.jpg",
   email: "karthikgolla493@gmail.com",
-  location: "Tirupati, Andhra Pradesh, India",
+  location: "Nellore, Andhra Pradesh, India",
   availability: "Open to Opportunities",
   education: "B.Tech Data Science Graduate (2024)",
   college: "Sri Venkateswara College of Engineering (SVCE), Tirupati",
