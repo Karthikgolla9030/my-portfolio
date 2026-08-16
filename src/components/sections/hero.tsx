@@ -35,9 +35,9 @@ function TwitterIcon({ size = 16, className }: { size?: number; className?: stri
 
 const socials = [
   { icon: GithubIcon, href: "https://github.com/Karthikgolla9030", label: "GitHub" },
-  { icon: LinkedinIcon, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/karthikgolla/", label: "LinkedIn" },
   { icon: TwitterIcon, href: "https://twitter.com", label: "Twitter" },
-  { icon: Mail, href: "mailto:karthik@example.com", label: "Email" },
+  { icon: Mail, href: "mailto:karthikgolla493@gmail.com", label: "Email" },
 ];
 
 export function Hero({ id }: { id?: string }) {

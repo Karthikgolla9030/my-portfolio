@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Karthik Golla",
   role: "AI Engineer | Python Backend Developer",
   avatar: "/images/profile.jpg",
-  email: "karthik@example.com",
+  email: "karthikgolla493@gmail.com",
   location: "Tirupati, Andhra Pradesh, India",
   availability: "Open to Opportunities",
   education: "B.Tech Data Science Graduate (2024)",
@@ -10,7 +10,7 @@ export const personalInfo = {
   responseTime: "Usually responds within 24 hours",
   socials: {
     github: "https://github.com/Karthikgolla9030",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/karthikgolla/",
     twitter: "https://twitter.com",
     leetcode: "https://leetcode.com"
   },

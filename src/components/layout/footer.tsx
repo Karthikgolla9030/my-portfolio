@@ -80,13 +80,13 @@ export function Footer() {
                 <a href="https://github.com/Karthikgolla9030" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="GitHub">
                   <GithubIcon size={15} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/karthikgolla/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="LinkedIn">
                   <LinkedinIcon size={15} />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="Twitter">
                   <TwitterIcon size={15} />
                 </a>
-                <a href="mailto:karthik@example.com" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="Email">
+                <a href="mailto:karthikgolla493@gmail.com" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="Email">
                   <Mail size={15} />
                 </a>
               </div>
