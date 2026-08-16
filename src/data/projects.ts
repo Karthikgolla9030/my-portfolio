@@ -39,7 +39,7 @@ export const projects: Project[] = [
     description: "A realtime communication platform with random interest-based matchmaking using Django Channels and React.",
     longDescription: "An advanced real-time communication platform allowing users to discover and connect with others through interest-based random matchmaking. Features robust WebSocket chat, secure JWT authentication, and dynamic friendships.",
     image: "/images/projects/linkora-main.png",
-    liveUrl: "[PASTE LINKORA DEPLOYMENT URL HERE]",
+    liveUrl: "https://omniroute-xgnt.onrender.com",
     githubUrl: "https://github.com/Karthikgolla9030/CHAT-APP",
     tags: ["React", "Django", "Django Channels", "Redis", "PostgreSQL", "WebSockets"],
     stats: {
