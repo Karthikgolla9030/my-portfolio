@@ -77,7 +77,7 @@ export function Footer() {
                 Connect
               </h4>
               <div className="flex items-center gap-3 justify-start md:justify-end">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="GitHub">
+                <a href="https://github.com/Karthikgolla9030" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="GitHub">
                   <GithubIcon size={15} />
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="LinkedIn">

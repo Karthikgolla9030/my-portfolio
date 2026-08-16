@@ -134,7 +134,7 @@ export function Contact({ id }: { id?: string }) {
                 Follow Me
               </h4>
               <div className="flex items-center gap-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-secondary border border-border text-foreground hover:bg-primary/10 hover:text-primary transition-all">
+                <a href="https://github.com/Karthikgolla9030" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-secondary border border-border text-foreground hover:bg-primary/10 hover:text-primary transition-all">
                   <GithubIcon size={20} />
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-secondary border border-border text-foreground hover:bg-primary/10 hover:text-primary transition-all">

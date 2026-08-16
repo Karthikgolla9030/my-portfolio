@@ -9,7 +9,7 @@ export const personalInfo = {
   college: "Sri Venkateswara College of Engineering (SVCE), Tirupati",
   responseTime: "Usually responds within 24 hours",
   socials: {
-    github: "https://github.com",
+    github: "https://github.com/Karthikgolla9030",
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
     leetcode: "https://leetcode.com"
