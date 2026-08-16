@@ -116,13 +116,13 @@ export function Hero({ id }: { id?: string }) {
                 {/* Minimal elegant pattern */}
                 <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(var(--foreground) 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}></div>
                 
-                <div className="relative w-full h-full z-10 mt-6">
+                <div className="absolute inset-0 z-10">
                   <Image
-                    src="/images/profile_nobg.png"
+                    src="/images/profile_original.jpg"
                     alt="Karthik Golla"
                     fill
                     priority
-                    className="object-contain object-bottom drop-shadow-xl scale-[1.02]"
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 280px, 320px"
                   />
                 </div>
