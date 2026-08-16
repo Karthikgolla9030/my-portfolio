@@ -40,7 +40,7 @@ export const projects: Project[] = [
     longDescription: "An advanced real-time communication platform allowing users to discover and connect with others through interest-based random matchmaking. Features robust WebSocket chat, secure JWT authentication, and dynamic friendships.",
     image: "/images/projects/linkora-main.png",
     liveUrl: "[PASTE LINKORA DEPLOYMENT URL HERE]",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/Karthikgolla9030/CHAT-APP",
     tags: ["React", "Django", "Django Channels", "Redis", "PostgreSQL", "WebSockets"],
     stats: {
       duration: "2 months",
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     description: "An interactive Power BI analysis designed to help users monitor sales performance, identify trends, compare business segments, and support data-driven decisions.",
     longDescription: "A comprehensive business performance intelligence dashboard built using Power BI and DAX measures to highlight top-performing products and sales channels.",
     image: "/images/projects/sales-performance-analysis.png",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/Karthikgolla9030/Infosys_Project",
     tags: ["Power BI", "DAX", "Power Query", "Data Cleaning", "Data Transformation", "Data Visualization", "Business Intelligence"],
     stats: {
       duration: "Completed",
@@ -96,6 +96,7 @@ export const projects: Project[] = [
     description: "Exploring restaurant data across Bengaluru to understand ratings, pricing, cuisines, locations, services, and customer engagement.",
     longDescription: "An exploratory data analysis project investigating customer ratings, pricing distribution, location clustering, and restaurant metrics.",
     image: "/images/projects/zomato.jpg",
+    githubUrl: "https://github.com/Karthikgolla9030/Zomato_Analysis_Project",
     tags: ["Python", "Jupyter Notebook", "NumPy", "Pandas", "Matplotlib", "Seaborn"],
     stats: {
       duration: "Completed",
