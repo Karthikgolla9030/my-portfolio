@@ -25,18 +25,9 @@ function LinkedinIcon({ size = 16, className }: { size?: number; className?: str
   );
 }
 
-function TwitterIcon({ size = 16, className }: { size?: number; className?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-    </svg>
-  );
-}
-
 const socials = [
   { icon: GithubIcon, href: "https://github.com/Karthikgolla9030", label: "GitHub" },
   { icon: LinkedinIcon, href: "https://www.linkedin.com/in/karthikgolla/", label: "LinkedIn" },
-  { icon: TwitterIcon, href: "https://twitter.com", label: "Twitter" },
   { icon: Mail, href: "mailto:karthikgolla493@gmail.com", label: "Email" },
 ];
 

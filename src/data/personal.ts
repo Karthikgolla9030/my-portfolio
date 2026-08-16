@@ -11,7 +11,6 @@ export const personalInfo = {
   socials: {
     github: "https://github.com/Karthikgolla9030",
     linkedin: "https://www.linkedin.com/in/karthikgolla/",
-    twitter: "https://twitter.com",
     leetcode: "https://leetcode.com"
   },
   stats: [

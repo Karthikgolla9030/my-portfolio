@@ -41,12 +41,6 @@ export const metadata: Metadata = {
     description: "Personal engineering website of Karthik Golla, showcasing AI-powered applications, backend systems, and data-driven solutions.",
     siteName: "Karthik Golla Portfolio"
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Karthik Golla | AI Engineer & Python Backend Developer",
-    description: "Personal engineering website of Karthik Golla, showcasing AI-powered applications, backend systems, and data-driven solutions.",
-    creator: "@karthikgolla"
-  },
   icons: {
     icon: "/favicon.ico"
   }

@@ -23,14 +23,6 @@ function LinkedinIcon({ size = 18 }) {
   );
 }
 
-function TwitterIcon({ size = 18 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-    </svg>
-  );
-}
-
 export function Footer() {
   const scrolltoTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -82,9 +74,6 @@ export function Footer() {
                 </a>
                 <a href="https://www.linkedin.com/in/karthikgolla/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="LinkedIn">
                   <LinkedinIcon size={15} />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="Twitter">
-                  <TwitterIcon size={15} />
                 </a>
                 <a href="mailto:karthikgolla493@gmail.com" className="p-2 rounded-md border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all" aria-label="Email">
                   <Mail size={15} />
