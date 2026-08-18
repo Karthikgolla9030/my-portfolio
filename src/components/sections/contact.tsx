@@ -34,21 +34,61 @@ export function Contact({ id }: { id?: string }) {
   const [subjectVal, setSubjectVal] = useState("");
   const [messageVal, setMessageVal] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nameVal || !emailVal || !messageVal) return;
     
+    // Basic frontend validation
+    if (!nameVal || !emailVal || !subjectVal || !messageVal) {
+      setErrorMessage("Please fill in all fields.");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailVal)) {
+      setErrorMessage("Please enter a valid email address.");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+      return;
+    }
+
     setStatus("sending");
-    // Mock API Submission
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nameVal,
+          email: emailVal,
+          subject: subjectVal,
+          message: messageVal,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
       setStatus("success");
       setNameVal("");
       setEmailVal("");
       setSubjectVal("");
       setMessageVal("");
-      setTimeout(() => setStatus("idle"), 4000);
-    }, 1500);
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error: any) {
+      setErrorMessage(error.message || "Something went wrong. Please try again or contact me directly by email.");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 6000);
+    }
   };
 
   return (
@@ -200,9 +240,11 @@ export function Contact({ id }: { id?: string }) {
                 className="w-full inline-flex items-center justify-center gap-2 bg-foreground hover:bg-foreground/90 disabled:opacity-70 text-background font-semibold text-sm py-4 rounded-lg transition-all"
               >
                 {status === "sending" ? (
-                  <span>Sending Message...</span>
+                  <span>Sending...</span>
                 ) : status === "success" ? (
-                  <span className="text-emerald-400">Message Sent Successfully!</span>
+                  <span className="text-emerald-400">Message sent successfully. I'll get back to you soon.</span>
+                ) : status === "error" ? (
+                  <span className="text-red-400">{errorMessage || "Something went wrong. Please try again or contact me directly by email."}</span>
                 ) : (
                   <>
                     <span>Send Message</span>
