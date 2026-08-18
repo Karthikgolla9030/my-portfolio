@@ -53,7 +53,7 @@ export function Hero({ id }: { id?: string }) {
                 Karthik Golla
               </h1>
               <h2 className="text-xl sm:text-2xl text-primary font-medium tracking-tight">
-                Data Science Graduate & Python Developer
+                Data Science Graduate
               </h2>
             </div>
 
