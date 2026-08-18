@@ -52,7 +52,7 @@ export interface Certification {
   date: string;
   image: string;
   credentialUrl: string;
-  category: 'Data Science' | 'AI/ML' | 'Cloud' | 'Others';
+  category: 'Data Science' | 'AI/ML' | 'Cloud' | 'Data Analysis' | 'Others';
 }
 
 export interface Article {

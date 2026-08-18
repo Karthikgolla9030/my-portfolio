@@ -1277,10 +1277,9 @@ function SalesDashboardCaseStudy({ project, related }: { project: any; related: 
 
 function LinkoraCaseStudy({ project, related }: { project: any; related: any[] }) {
   const [activeAnchor, setActiveAnchor] = React.useState("overview");
-  const [lightboxImage, setLightboxImage] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const anchors = ["overview", "problem", "whatibuilt", "matchmaking", "realtime", "architecture", "contribution", "challenges", "learned", "future"];
+    const anchors = ["overview", "problem", "objectives", "features", "tech-stack", "architecture", "workflow", "what-i-built", "challenges", "lessons", "future"];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 250;
       for (const anchor of anchors) {
@@ -1303,44 +1302,22 @@ function LinkoraCaseStudy({ project, related }: { project: any; related: any[] }
   const toc = [
     { id: "overview", label: "Overview" },
     { id: "problem", label: "The Problem" },
-    { id: "whatibuilt", label: "What I Built" },
-    { id: "matchmaking", label: "Intelligent Matchmaking" },
-    { id: "realtime", label: "Real-Time Messaging" },
-    { id: "architecture", label: "Architecture" },
-    { id: "contribution", label: "My Contribution" },
+    { id: "objectives", label: "Objectives" },
+    { id: "features", label: "Key Features" },
+    { id: "tech-stack", label: "Tech Stack" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "workflow", label: "Workflow" },
+    { id: "what-i-built", label: "What I Built" },
     { id: "challenges", label: "Challenges & Solutions" },
-    { id: "learned", label: "What I Learned" },
+    { id: "lessons", label: "What I Learned" },
     { id: "future", label: "Future Scope" }
   ];
 
   return (
     <main className="w-full bg-background min-h-screen py-16 md:py-24 relative">
-      {/* Lightbox Overlay */}
-      {lightboxImage && (
-        <div 
-          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 animate-in fade-in duration-200"
-          onClick={() => setLightboxImage(null)}
-        >
-          <button 
-            className="absolute top-6 right-6 md:top-8 md:right-8 p-3 bg-secondary text-foreground rounded-full hover:bg-border transition-colors shadow-sm"
-            onClick={(e) => { e.stopPropagation(); setLightboxImage(null); }}
-          >
-            <X size={24} />
-          </button>
-          <div className="relative w-full max-w-7xl max-h-full aspect-video rounded-xl overflow-hidden shadow-2xl border border-border/50" onClick={(e) => e.stopPropagation()}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={lightboxImage} 
-              alt="Expanded view" 
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-      )}
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Navigation breadcrumbs bar */}
+        {/* Navigation & Header */}
         <div className="flex items-center justify-between pb-8 border-b border-border mb-12">
           <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -1353,10 +1330,8 @@ function LinkoraCaseStudy({ project, related }: { project: any; related: any[] }
 
         <ProjectHero project={project} />
 
-        {/* Split documentation portal layout */}
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           
-          {/* Left: Sticky Table of Contents */}
           <aside className="w-full lg:w-64 shrink-0 sticky top-28 hidden lg:block space-y-6">
             <h3 className="font-heading font-bold text-xs uppercase tracking-widest text-muted-foreground">DOCUMENTATION</h3>
             <nav className="flex flex-col gap-2 border-l border-border pl-5 text-sm font-medium">
@@ -1368,395 +1343,1070 @@ function LinkoraCaseStudy({ project, related }: { project: any; related: any[] }
             </nav>
           </aside>
 
-          {/* Right: Main Content */}
           <div className="flex-1 max-w-4xl space-y-24 font-sans text-muted-foreground">
             
-            {/* 01 — OVERVIEW */}
+            {/* 01 - OVERVIEW */}
             <section id="overview" className="space-y-6 scroll-mt-28 pt-4">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">Overview</h2>
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">01</span> Overview
+              </h2>
               <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
-                <p>Linkora is a real-time web application that connects people for conversations based on their interests and matching preferences.</p>
-                <p>The interesting part wasn't just building a chat screen. I wanted to understand what happens behind the scenes when users need to be matched, connected in real time, and kept in the same conversation even when their connection briefly drops.</p>
-              </div>
-              
-              <div 
-                className="w-full aspect-[16/9] bg-secondary border border-border rounded-2xl shadow-md overflow-hidden cursor-zoom-in relative group mt-8"
-                onClick={() => setLightboxImage("/images/projects/linkora-main.png")}
-              >
-                <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
-                  <div className="bg-background/90 text-foreground text-sm font-medium px-4 py-2 rounded-full shadow-sm">Click to expand</div>
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/images/projects/linkora-main.png" 
-                  alt="Linkora Main UI"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  onError={(e) => {
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='20' fill='%239ca3af'%3EPlaceholder: linkora-main.png%3C/text%3E%3C/svg%3E";
-                  }}
-                />
+                <p>
+                  Linkora is a realtime communication platform that connects users through random, interest-based matchmaking rather than manual search or friend requests.
+                </p>
+                <p>
+                  Technically, it explores the challenge of coordinating ephemeral interactions. It requires seamlessly bridging a React frontend with a Django backend while managing concurrent matchmaking queues, temporary conversation states via Redis, WebSocket message delivery, and durable persistence for long-term friendships in PostgreSQL.
+                </p>
               </div>
             </section>
 
-            {/* 02 — THE PROBLEM */}
+            {/* 02 - THE PROBLEM */}
             <section id="problem" className="space-y-6 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">The Problem</h2>
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">02</span> The Problem
+              </h2>
               <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
-                <p>Finding someone to talk to usually means searching through profiles, sending requests, and waiting for a response. I wanted to explore a different approach — let users describe who they are looking for and let the system find a suitable person for them.</p>
-                <p>The harder part came after the match. Once two users are connected, the system has to keep track of their session, deliver messages instantly, handle typing and read states, and deal with users disconnecting unexpectedly.</p>
+                <p>
+                  Traditional communication platforms require users to manually search for people, browse profiles, and send requests before initiating a conversation. Linkora flips this model: users define who they want to meet, and the system dynamically finds a compatible person.
+                </p>
+                <p>
+                  This dynamic assignment creates significant engineering challenges once matching occurs. The system must safely handle simultaneous search queries, safely assign matches without collisions, stream real-time messages instantly, handle temporary network disconnections gracefully, and distinguish between data that must persist (like friendships) and data that should vanish (like typing indicators).
+                </p>
               </div>
             </section>
 
-            {/* 03 — WHAT I BUILT */}
-            <section id="whatibuilt" className="space-y-8 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">What I Built</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* 03 - OBJECTIVES */}
+            <section id="objectives" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">03</span> Objectives
+              </h2>
+              <ul className="space-y-4">
                 {[
-                  { num: "01", title: "Preference-based Matching", desc: "Users can specify matching preferences such as intent, gender, interests, language and country." },
-                  { num: "02", title: "Instant Matching", desc: "Users enter a matchmaking queue and are connected with a compatible person." },
-                  { num: "03", title: "Real-Time Chat", desc: "Messages are delivered through WebSockets rather than repeatedly polling the server." },
-                  { num: "04", title: "Friend Connections", desc: "A random conversation can turn into a longer-term connection through the friendship system." },
-                  { num: "05", title: "Typing & Read Status", desc: "The chat supports typing indicators and delivered/seen message states." },
-                  { num: "06", title: "Connection Recovery", desc: "A temporary network interruption does not immediately destroy the conversation." }
-                ].map((feature, i) => (
-                  <div key={i} className="p-6 bg-background border border-border rounded-xl shadow-sm">
-                    <span className="font-mono text-sm font-bold text-primary tracking-widest uppercase mb-3 block">{feature.num}</span>
-                    <h3 className="font-bold text-foreground text-lg mb-2">{feature.title}</h3>
-                    <p className="text-base text-muted-foreground">{feature.desc}</p>
+                  "Build preference-aware random matchmaking.",
+                  "Enable real-time communication using WebSockets.",
+                  "Maintain reliable conversation state across temporary disconnects.",
+                  "Support longer-term connections through a persistent friendship system.",
+                  "Separate persistent database records from short-lived real-time state."
+                ].map((obj, i) => (
+                  <li key={i} className="flex gap-4 p-5 bg-background border border-border rounded-xl shadow-sm">
+                    <CheckCircle className="text-primary shrink-0 w-6 h-6" />
+                    <p className="text-base text-foreground font-medium">{obj}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* 04 - KEY FEATURES */}
+            <section id="features" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">04</span> Key Features
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "01 \u2014 Preference-based Matchmaking", desc: "Finds conversation partners based on shared interests, language, and country." },
+                  { title: "02 \u2014 Instant Random Matching", desc: "Dynamically pairs users waiting in the active matchmaking queue." },
+                  { title: "03 \u2014 Real-Time Messaging", desc: "Delivers messages instantly between matched users via WebSockets." },
+                  { title: "04 \u2014 Typing & Read Status", desc: "Displays live typing indicators and updates message read receipts in real-time." },
+                  { title: "05 \u2014 Friendship Connections", desc: "Allows randomly matched users to form permanent connections." },
+                  { title: "06 \u2014 Reconnection Handling", desc: "Maintains active chat sessions through temporary network drops or page refreshes." }
+                ].map((feat, i) => (
+                  <div key={i} className="p-6 bg-secondary/20 border border-border rounded-2xl space-y-3">
+                    <h3 className="font-heading font-bold text-lg text-foreground">{feat.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* 04 — INTELLIGENT MATCHMAKING */}
-            <section id="matchmaking" className="space-y-8 scroll-mt-28 bg-secondary/10 p-6 md:p-10 rounded-3xl border border-border">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">The Matching Logic</h2>
-              <p className="text-base md:text-lg leading-relaxed text-foreground">
-                The matching system is where most of the interesting logic happens.
-              </p>
-              
-              <div className="my-8 overflow-hidden rounded-xl border border-border bg-background shadow-sm p-6 text-center font-mono text-sm text-foreground">
-                <span className="block text-primary font-bold">USER</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block">MATCHING PREFERENCES</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block">QUEUE</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block">FILTER COMPATIBLE USERS</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block">SCORE CANDIDATES</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block text-emerald-600 font-bold">SELECT MATCH</span>
-                <span className="block text-muted-foreground my-1">↓</span>
-                <span className="block font-bold">CREATE CHAT SESSION</span>
-              </div>
-
-              <div className="space-y-6 text-base md:text-lg leading-relaxed text-foreground">
-                <p>
-                  The system considers: <strong>Gender, Looking-for intent, Interests, Language, Country, and Wait time.</strong>
-                </p>
-                <p>
-                  Candidates start with a base score. Shared interests contribute the most, while matching language and country add smaller weights. As someone waits longer, the matching criteria gradually relax so that users do not remain stuck in the queue indefinitely.
-                </p>
-                
-                <div className="bg-background border border-border rounded-xl p-6 my-6 font-mono text-sm grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex justify-between"><span>Base score:</span><span className="font-bold">0.5</span></div>
-                  <div className="flex justify-between"><span>Interest overlap:</span><span className="font-bold text-primary">up to +0.35</span></div>
-                  <div className="flex justify-between"><span>Language:</span><span className="font-bold text-primary">+0.08</span></div>
-                  <div className="flex justify-between"><span>Country:</span><span className="font-bold text-primary">+0.05</span></div>
-                  <div className="flex justify-between sm:col-span-2"><span>Wait-time relaxation:</span><span className="font-bold text-emerald-600">up to +0.20</span></div>
+            {/* 05 - TECH STACK */}
+            <section id="tech-stack" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">05</span> Tech Stack
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Frontend</span>
+                  <p className="font-semibold text-foreground text-lg">React</p>
                 </div>
-
-                <p>
-                  Users also cannot be repeatedly matched with the same person after the configured encounter limit (<code className="bg-foreground/5 px-2 py-1 rounded text-sm text-primary">MAX_MATCH_ENCOUNTERS = 3</code>), unless they are already friends.
-                </p>
-
-                <div className="bg-primary/5 border-l-4 border-primary p-6 mt-8 rounded-r-xl">
-                  <h4 className="font-bold text-foreground mb-2">Concurrency & Locks</h4>
-                  <p>
-                    Because multiple users can be searching at the same time, matchmaking uses a <strong>Redis distributed lock</strong> to prevent the same user from being assigned to multiple conversations concurrently.
-                  </p>
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Backend</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">Django</p>
+                    <p className="text-sm text-muted-foreground">Django REST Framework</p>
+                    <p className="text-sm text-muted-foreground">Django Channels</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div 
-                className="w-full aspect-video bg-background border border-border rounded-2xl shadow-sm overflow-hidden cursor-zoom-in relative group mt-8 p-4"
-                onClick={() => setLightboxImage("/images/projects/linkora-match.jpg")}
-              >
-                <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
-                  <div className="bg-background/90 text-foreground text-sm font-medium px-4 py-2 rounded-full shadow-sm">Click to expand</div>
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Real-Time / State</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">WebSockets</p>
+                    <p className="text-sm text-muted-foreground">Redis</p>
+                  </div>
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/images/projects/linkora-match.jpg" 
-                  alt="Matchmaking Flow"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  onError={(e) => {
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='20' fill='%239ca3af'%3EPlaceholder: linkora-match.jpg%3C/text%3E%3C/svg%3E";
-                  }}
-                />
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Storage & Security</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">PostgreSQL</p>
+                    <p className="text-sm text-muted-foreground">JWT Authentication</p>
+                  </div>
+                </div>
               </div>
             </section>
 
-            {/* 05 — REAL-TIME MESSAGING */}
-            <section id="realtime" className="space-y-8 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">Real-Time, Not Just Chat</h2>
-              <p className="text-base md:text-lg leading-relaxed text-foreground">
-                Once a match is found, the conversation moves into a WebSocket-based chat session.
-              </p>
-              <p className="text-base md:text-lg leading-relaxed text-foreground">
-                Messages are sent through WebSockets and broadcast through Django Channels. Redis acts as the channel layer and also handles short-lived state that doesn't need to live in the database.
-              </p>
-
-              <div className="my-8 p-6 bg-secondary/20 border border-border rounded-xl text-center font-mono text-sm text-foreground flex flex-col items-center gap-2">
-                <span className="font-bold">USER A</span>
-                <span className="text-primary text-lg">↕</span>
-                <span>WEBSOCKET</span>
-                <span className="text-primary text-lg">↕</span>
-                <span className="bg-background px-4 py-2 border border-border rounded-md font-bold">DJANGO CHANNELS</span>
-                <span className="text-primary text-lg">↕</span>
-                <span className="bg-emerald-500/10 text-emerald-700 px-4 py-2 border border-emerald-500/20 rounded-md font-bold">REDIS</span>
-                <span className="text-primary text-lg">↕</span>
-                <span>WEBSOCKET</span>
-                <span className="text-primary text-lg">↕</span>
-                <span className="font-bold">USER B</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-                <div className="space-y-3">
-                  <h3 className="font-bold text-foreground">Typing Indicators</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Typing status is temporary, so it is stored in Redis with a short 3-second expiry instead of repeatedly writing to the database.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-bold text-foreground">Read Receipts</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Messages can move between delivered and seen states, with updates sent back through the WebSocket connection.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-bold text-foreground">Reconnect Grace Period</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    This was one of the parts I found particularly useful to solve. If a user temporarily loses their connection or refreshes the page, the chat is not immediately destroyed. The system keeps the session alive for 30 seconds, giving the user time to reconnect.
-                  </p>
-                </div>
-              </div>
-              
-              <div 
-                className="w-full aspect-[16/9] bg-secondary border border-border rounded-2xl shadow-sm overflow-hidden cursor-zoom-in relative group mt-8"
-                onClick={() => setLightboxImage("/images/projects/linkora-chat.jpg")}
-              >
-                <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
-                  <div className="bg-background/90 text-foreground text-sm font-medium px-4 py-2 rounded-full shadow-sm">Click to expand</div>
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/images/projects/linkora-chat.jpg" 
-                  alt="Chat Interface"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  onError={(e) => {
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='20' fill='%239ca3af'%3EPlaceholder: linkora-chat.jpg%3C/text%3E%3C/svg%3E";
-                  }}
-                />
-              </div>
-            </section>
-
-            {/* 06 — ARCHITECTURE */}
+            {/* 06 - SYSTEM ARCHITECTURE */}
             <section id="architecture" className="space-y-8 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">How the Pieces Fit Together</h2>
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">06</span> System Architecture
+              </h2>
               
-              <div 
-                className="w-full aspect-[2/1] bg-background border border-border rounded-2xl shadow-sm overflow-hidden cursor-zoom-in relative group mt-8 p-4 mb-10"
-                onClick={() => setLightboxImage("/images/projects/linkora-arch.jpg")}
-              >
-                <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
-                  <div className="bg-background/90 text-foreground text-sm font-medium px-4 py-2 rounded-full shadow-sm">Click to expand</div>
+              <div className="p-8 bg-secondary/30 rounded-2xl border border-border mb-8 overflow-x-auto">
+                <div className="flex flex-col items-center min-w-[500px]">
+                  <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-64 text-center">React</div>
+                  <div className="h-8 border-l-2 border-dashed border-primary/50 relative">
+                    <span className="absolute top-1/2 -translate-y-1/2 left-4 text-xs font-mono font-bold text-muted-foreground whitespace-nowrap">REST APIs / WebSockets</span>
+                  </div>
+                  <div className="flex gap-4 w-full justify-center">
+                    <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-48 text-center">Django / DRF</div>
+                    <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-48 text-center">Django Channels</div>
+                  </div>
+                  <div className="h-8 border-l-2 border-dashed border-primary/50"></div>
+                  <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-64 text-center">Service Layer</div>
+                  <div className="flex w-full justify-center mt-4 gap-16 relative">
+                    <div className="absolute top-[-16px] left-1/2 -translate-x-1/2 w-[240px] border-t-2 border-dashed border-primary/50"></div>
+                    <div className="absolute top-[-16px] left-[calc(50%-120px)] h-4 border-l-2 border-dashed border-primary/50"></div>
+                    <div className="absolute top-[-16px] right-[calc(50%-120px)] h-4 border-l-2 border-dashed border-primary/50"></div>
+                    <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-48 text-center">Redis</div>
+                    <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-48 text-center">PostgreSQL</div>
+                  </div>
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/images/projects/linkora-arch.jpg" 
-                  alt="Architecture Diagram"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  onError={(e) => {
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='20' fill='%239ca3af'%3EPlaceholder: linkora-arch.jpg%3C/text%3E%3C/svg%3E";
-                  }}
-                />
               </div>
 
-              <div className="space-y-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground mb-2">React</h3>
-                    <p className="text-base text-muted-foreground">Handles the user interface and communicates with the backend through REST APIs and WebSockets.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground mb-2">Django / DRF</h3>
-                    <p className="text-base text-muted-foreground">Handles API requests, authentication and application-level operations.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground mb-2">Django Channels</h3>
-                    <p className="text-base text-muted-foreground">Handles the real-time WebSocket connections.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground mb-2 text-primary">Redis</h3>
-                    <p className="text-base text-muted-foreground">Redis is used for more than just messaging. It handles channel-layer communication, matchmaking locks, temporary queue/session state, typing indicators, and reconnect timers.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground mb-2">Database (PostgreSQL)</h3>
-                    <p className="text-base text-muted-foreground">Persistent application data (Users → Match Queue → Chat Room → Messages).</p>
-                  </div>
+              <div className="space-y-6">
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">React</div>
+                  <p className="text-base text-foreground leading-relaxed">Handles the interface and communicates with the backend through REST APIs and WebSockets.</p>
                 </div>
-
-                <div className="bg-secondary/20 p-6 rounded-2xl border border-border mt-8">
-                  <h3 className="font-bold text-lg text-foreground mb-3">Service Layer</h3>
-                  <p className="text-base text-foreground mb-4">Business logic is separated into services such as:</p>
-                  <ul className="flex flex-wrap gap-3 font-mono text-sm mb-4">
-                    <li className="bg-background px-3 py-1.5 border border-border rounded shadow-sm">MatchmakingService</li>
-                    <li className="bg-background px-3 py-1.5 border border-border rounded shadow-sm">ChatService</li>
-                    <li className="bg-background px-3 py-1.5 border border-border rounded shadow-sm">SessionService</li>
-                    <li className="bg-background px-3 py-1.5 border border-border rounded shadow-sm">PresenceService</li>
-                  </ul>
-                  <p className="text-base text-muted-foreground italic border-l-2 border-primary/30 pl-3 py-1">
-                    "Keeping the main business logic inside services keeps the WebSocket consumers relatively small and makes the core logic easier to reason about and test."
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Django / DRF</div>
+                  <p className="text-base text-foreground leading-relaxed">Handles standard HTTP API requests, JWT authentication, and application operations.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Django Channels</div>
+                  <p className="text-base text-foreground leading-relaxed">Manages persistent WebSocket connections and routes real-time communication events.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Redis</div>
+                  <p className="text-base text-foreground leading-relaxed">Acts as the high-speed channel layer for Django Channels, while also handling matchmaking coordination, distributed locks, typing state, and reconnect timers.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">PostgreSQL</div>
+                  <p className="text-base text-foreground leading-relaxed">Stores persistent application data such as users, chat rooms, historical messages, friendships, and other durable records.</p>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <div className="font-bold text-foreground text-lg">Service Layer</div>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Business logic is cleanly separated from HTTP views and WebSocket consumers into dedicated services: <code>MatchmakingService</code>, <code>ChatService</code>, <code>SessionService</code>, and <code>PresenceService</code>. This separation allows core algorithms to be tested independently and reused across both REST endpoints and background tasks without duplicating logic.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* 07 — MY CONTRIBUTION */}
-            <section id="contribution" className="space-y-6 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">My Contribution</h2>
-              <div className="p-8 bg-background border border-border rounded-3xl shadow-sm">
+            {/* 07 - WORKFLOW */}
+            <section id="workflow" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">07</span> Workflow
+              </h2>
+              
+              <div className="p-8 border border-border rounded-2xl bg-background space-y-2">
+                {[
+                  { label: "USER", desc: "Initiates the platform experience." },
+                  { label: "SET MATCHING PREFERENCES", desc: "User defines filters for gender, looking-for intent, language, and country." },
+                  { label: "ENTER MATCH QUEUE", desc: "User is placed into a temporary holding pool." },
+                  { label: "FILTER COMPATIBLE USERS", desc: "System narrows candidates by strict requirements (e.g., maximum 3 encounters unless already friends)." },
+                  { label: "SCORE CANDIDATES", desc: "Calculates compatibility using: Base score (0.5), Interest overlap (up to +0.35), Language (+0.08), Country (+0.05), and Wait-time relaxation (up to +0.20)." },
+                  { label: "SELECT MATCH", desc: "The highest scoring candidate is selected." },
+                  { label: "CREATE CHAT SESSION", desc: "A dedicated room is securely provisioned in PostgreSQL." },
+                  { label: "WEBSOCKET CONNECTION", desc: "Both clients establish persistent connections to the room." },
+                  { label: "REAL-TIME CONVERSATION", desc: "Messages, typing indicators, and read receipts flow through Redis/Django Channels." },
+                  { label: "OPTIONAL FRIEND CONNECTION", desc: "Users may choose to save the connection persistently." }
+                ].map((step, i, arr) => (
+                  <div key={i} className="flex flex-col">
+                    <div className="flex gap-6 items-start">
+                      <div className="mt-1 w-6 h-6 rounded-full bg-secondary flex items-center justify-center font-mono text-xs font-bold text-muted-foreground border border-border shrink-0">
+                        {i + 1}
+                      </div>
+                      <div>
+                        <div className="font-bold text-foreground">{step.label}</div>
+                        <div className="text-sm text-muted-foreground mt-1">{step.desc}</div>
+                      </div>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="h-6 w-px bg-border ml-3 my-1"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 08 - WHAT I BUILT */}
+            <section id="what-i-built" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">08</span> What I Built
+              </h2>
+              <div className="space-y-6">
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Frontend/Backend Integration</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Designed the comprehensive integration layer connecting the React interface with the Django backend, ensuring seamless state transitions between standard HTTP REST calls (for auth and data fetching) and WebSockets (for live messaging).
+                  </p>
+                </div>
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Preference-Based Matchmaking System</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Implemented the core scoring algorithm that evaluates candidate compatibility in real-time, calculating weighted factors like shared interests and wait-time relaxation to ensure quality matches without excessive queue delays.
+                  </p>
+                </div>
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Real-Time Communication Layer</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Built the real-time infrastructure around Django Channels and WebSockets so messages, typing state, and read-state updates could move between connected users seamlessly without relying on expensive, repeated polling requests.
+                  </p>
+                </div>
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Ephemeral State & Coordination</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Configured Redis not just as a message broker, but as an active coordination layer managing distributed matchmaking locks, highly volatile typing indicators, and user presence logic.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* 09 - CHALLENGES & SOLUTIONS */}
+            <section id="challenges" className="space-y-12 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">09</span> Challenges & Solutions
+              </h2>
+
+              <div className="space-y-10">
+                <div className="space-y-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block border-b border-border/50 pb-2">CHALLENGE 01 \u2014 CONCURRENT MATCHMAKING</span>
+                  <div className="space-y-4">
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-foreground">Problem:</strong> Two users can begin matchmaking at almost the exact same time, creating race conditions where multiple requests attempt to assign the same candidate simultaneously.</p>
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-emerald-600">Solution:</strong> Implemented a Redis distributed lock around the core matchmaking operation. This ensures that concurrent requests queue safely and cannot assign or modify the same user's match state simultaneously, teaching me the critical importance of atomic operations in multi-user environments.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block border-b border-border/50 pb-2">CHALLENGE 02 \u2014 TEMPORARY WEBSOCKET DISCONNECTION</span>
+                  <div className="space-y-4">
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-foreground">Problem:</strong> Normal user actions like refreshing a page, switching network tabs, or hitting mobile dead zones shouldn't immediately permanently destroy an active random conversation.</p>
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-emerald-600">Solution:</strong> Built a 30-second reconnect grace period backed by Redis timers. Instead of immediately destroying the session upon a WebSocket disconnect, the server waits. If the user reconnects within the window, the session resumes seamlessly. This reinforced that temporary failure needs to be treated as part of normal real-time system behavior.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block border-b border-border/50 pb-2">CHALLENGE 03 \u2014 SHORT-LIVED TYPING STATE</span>
+                  <div className="space-y-4">
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-foreground">Problem:</strong> Typing events trigger constantly. Writing every keystroke event to a PostgreSQL database would cause immense disk I/O for data that is entirely irrelevant seconds later.</p>
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-emerald-600">Solution:</strong> Stored typing state entirely as temporary keys in Redis with a strict 3-second TTL (Time-To-Live). The database handles persistent durable history, while Redis handles volatile ephemeral state, highlighting the architectural distinction between data storage and state management.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 10 - WHAT I LEARNED */}
+            <section id="lessons" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">10</span> What I Learned
+              </h2>
+              <div className="p-8 bg-secondary/30 border border-border rounded-2xl">
                 <ul className="space-y-4">
-                  {[
-                    "Built and worked on the React frontend.",
-                    "Implemented backend functionality using Django / DRF.",
-                    "Worked on matchmaking logic.",
-                    "Implemented real-time communication using WebSockets.",
-                    "Worked with Redis for real-time state and matchmaking coordination.",
-                    "Implemented friendship and chat flows.",
-                    "Worked on authentication.",
-                    "Integrated frontend and backend functionality.",
-                    "Worked through connection and state-management issues."
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-primary font-bold mt-0.5">•</span>
-                      <span className="text-base text-foreground font-medium">{item}</span>
-                    </li>
-                  ))}
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Real-time systems are largely about state management\u2014handling what happens when users drop, reconnect, or timeout.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Concurrency becomes a massive factor when multiple users interact simultaneously; you cannot trust standard queries to be thread-safe.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Redis is exceptionally powerful beyond caching, acting as a lock manager, TTL store, and pub/sub broker.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Connection failures need to be designed directly into the normal user flow, not just treated as edge case errors.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Separating complex business logic from WebSocket consumers into dedicated service layers massively improves testability and maintainability.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">A deceivingly simple UI interaction (like matching and chatting) requires significant orchestration and backend coordination behind the scenes.</p>
+                  </li>
                 </ul>
               </div>
             </section>
 
-            {/* 08 — CHALLENGES & SOLUTIONS */}
-            <section id="challenges" className="space-y-8 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">Challenges & Solutions</h2>
-              
-              <div className="grid grid-cols-1 gap-8">
+            {/* 11 - FUTURE SCOPE */}
+            <section id="future" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">11</span> Future Scope
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  "More sophisticated matchmaking algorithms utilizing machine learning vectors.",
+                  "Better abuse prevention, automated chat moderation, and reporting workflows.",
+                  "Improved presence handling to indicate when friends are currently available.",
+                  "Decoupled and horizontally scalable matchmaking microservices.",
+                  "Better conversation discovery and reconnection experiences for dropped sessions."
+                ].map((imp, i) => (
+                  <div key={i} className="p-5 bg-background border border-border rounded-xl flex items-start gap-3">
+                    <ArrowRight className="w-4 h-4 text-primary mt-1 shrink-0" />
+                    <span className="text-sm text-foreground font-medium">{imp}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Optional Section 12: Related Projects */}
+            {related && related.length > 0 && (
+              <section id="related" className="space-y-8 scroll-mt-28 pt-12 border-t border-border">
+                <h2 className="font-heading font-bold text-2xl text-foreground tracking-tight">
+                  Related Projects
+                </h2>
                 
-                <div className="p-8 bg-background border border-border rounded-2xl shadow-sm">
-                  <h3 className="font-mono text-sm font-bold text-primary tracking-widest uppercase mb-4 pb-2 border-b border-border/50">01 — CHALLENGE</h3>
-                  <div className="space-y-6">
-                    <p className="text-base text-foreground font-medium">
-                      Two users can start searching at almost the same time. Without coordination, the same person could potentially be assigned to more than one match.
-                    </p>
-                    <div>
-                      <span className="block text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">SOLUTION</span>
-                      <p className="text-base text-muted-foreground leading-relaxed">
-                        Used a Redis distributed lock while evaluating and assigning matches so that concurrent matchmaking operations do not select the same user at the same time.
-                      </p>
-                    </div>
-                    <div className="pt-2">
-                      <span className="text-sm font-serif italic text-foreground">"This introduced me to concurrency problems that are easy to miss when a system is tested with only one user."</span>
-                    </div>
-                  </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {related.map((relProject) => (
+                    <Link
+                      key={relProject.id}
+                      href={`/projects/${relProject.slug}`}
+                      className="p-6 rounded-2xl bg-background border border-border hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md group"
+                    >
+                      <div className="space-y-3">
+                        <span className="text-[10px] font-mono font-bold text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest inline-block">
+                          {relProject.tags[0]}
+                        </span>
+                        <h4 className="font-heading font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                          {relProject.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground font-sans line-clamp-2 leading-relaxed">
+                          {relProject.description}
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary mt-6 self-end group-hover:translate-x-1 transition-transform">
+                        <span>Read Case Study</span>
+                        <ArrowRight size={14} />
+                      </span>
+                    </Link>
+                  ))}
                 </div>
+              </section>
+            )}
 
-                <div className="p-8 bg-background border border-border rounded-2xl shadow-sm">
-                  <h3 className="font-mono text-sm font-bold text-primary tracking-widest uppercase mb-4 pb-2 border-b border-border/50">02 — CHALLENGE</h3>
-                  <div className="space-y-6">
-                    <p className="text-base text-foreground font-medium">
-                      A WebSocket can disconnect because of a refresh, network problem, or temporary connection loss. Ending the conversation immediately would create a poor user experience.
-                    </p>
-                    <div>
-                      <span className="block text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">SOLUTION</span>
-                      <p className="text-base text-muted-foreground leading-relaxed">
-                        Implemented a 30-second reconnect grace period using Redis. If the user reconnects within that period, the session can continue; otherwise the conversation is closed.
-                      </p>
-                    </div>
-                    <div className="pt-2">
-                      <span className="text-sm font-serif italic text-foreground">"I learned that real-time applications have to handle failure as part of the normal user flow."</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 bg-background border border-border rounded-2xl shadow-sm">
-                  <h3 className="font-mono text-sm font-bold text-primary tracking-widest uppercase mb-4 pb-2 border-b border-border/50">03 — CHALLENGE</h3>
-                  <div className="space-y-6">
-                    <p className="text-base text-foreground font-medium">
-                      Typing indicators can generate frequent updates. Writing every typing event to the database would create unnecessary load for information that only matters for a few seconds.
-                    </p>
-                    <div>
-                      <span className="block text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">SOLUTION</span>
-                      <p className="text-base text-muted-foreground leading-relaxed">
-                        Used Redis with a short 3-second TTL for temporary typing state instead of persisting every event.
-                      </p>
-                    </div>
-                    <div className="pt-2">
-                      <span className="text-sm font-serif italic text-foreground">"This helped me understand the difference between information that needs to be stored permanently and state that only needs to exist temporarily."</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 09 — WHAT I LEARNED */}
-            <section id="learned" className="space-y-8 scroll-mt-28">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">What Building Linkora Taught Me</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {[
-                  "Real-time systems are mostly about managing state.",
-                  "A feature that looks simple from the UI can become much more complicated when multiple users interact with it at the same time.",
-                  "Redis is useful for much more than caching.",
-                  "Connection failures are part of the system, not just edge cases.",
-                  "Separating business logic from consumers makes real-time code easier to understand.",
-                  "Building the project made me think more about what happens between two users clicking a button and actually seeing the result."
-                ].map((lesson, i) => (
-                  <div key={i} className="flex gap-4 p-5 bg-secondary/30 border border-border rounded-xl shadow-sm">
-                    <CheckCircle className="text-primary shrink-0 w-5 h-5 mt-0.5" />
-                    <p className="text-base text-foreground font-medium">{lesson}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* 10 — FUTURE SCOPE */}
-            <section id="future" className="space-y-8 scroll-mt-28 pt-8 border-t border-border">
-              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2">If I Took It Further</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { title: "01 — Better Match Ranking", desc: "Improve the matching model with more signals and feedback from previous conversations." },
-                  { title: "02 — Scaling Real-Time Infrastructure", desc: "Explore how the real-time layer would behave with a much larger concurrent user base." },
-                  { title: "03 — Moderation", desc: "Add stronger reporting, moderation and abuse-prevention mechanisms." },
-                  { title: "04 — Better Presence & Notifications", desc: "Improve presence tracking and notification behavior across reconnects and sessions." }
-                ].map((idea, i) => (
-                  <div key={i} className="p-6 border border-border rounded-xl bg-background shadow-sm">
-                    <h4 className="font-mono text-sm font-bold text-foreground mb-2">{idea.title}</h4>
-                    <p className="text-sm text-muted-foreground">{idea.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-            
           </div>
         </div>
       </div>
     </main>
   );
 }
+
+
+
+function SkillSphereCaseStudy({ project, related }: { project: any; related: any[] }) {
+  const [activeAnchor, setActiveAnchor] = React.useState("overview");
+
+  React.useEffect(() => {
+    const anchors = [
+      "overview", "problem", "solution", "why-interests", "practical-value", "why-i-built",
+      "objectives", "features", "tech-stack", "architecture", "workflow", "matching-logic",
+      "what-i-built", "challenges", "lessons", "future"
+    ];
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 250;
+      for (const anchor of anchors) {
+        const el = document.getElementById(anchor);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveAnchor(anchor);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toc = [
+    { id: "overview", label: "Overview" },
+    { id: "problem", label: "The Problem" },
+    { id: "solution", label: "The Solution" },
+    { id: "why-interests", label: "Why Interests Matter" },
+    { id: "practical-value", label: "Practical Value" },
+    { id: "why-i-built", label: "Why I Built It" },
+    { id: "objectives", label: "Objectives" },
+    { id: "features", label: "Key Features" },
+    { id: "tech-stack", label: "Tech Stack" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "workflow", label: "Workflow" },
+    { id: "matching-logic", label: "Matching Logic" },
+    { id: "what-i-built", label: "What I Built" },
+    { id: "challenges", label: "Challenges & Solutions" },
+    { id: "lessons", label: "What I Learned" },
+    { id: "future", label: "Future Scope" }
+  ];
+
+  return (
+    <main className="w-full bg-background min-h-screen py-16 md:py-24 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Navigation & Header */}
+        <div className="flex items-center justify-between pb-8 border-b border-border mb-12">
+          <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors group">
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Projects</span>
+          </Link>
+          <span className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-widest">
+            Case Study: {project.title}
+          </span>
+        </div>
+
+        <ProjectHero project={project} />
+
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          
+          <aside className="w-full lg:w-64 shrink-0 sticky top-28 hidden lg:block space-y-6">
+            <h3 className="font-heading font-bold text-xs uppercase tracking-widest text-muted-foreground">DOCUMENTATION</h3>
+            <nav className="flex flex-col gap-2 border-l border-border pl-5 text-sm font-medium">
+              {toc.map((item) => (
+                <a key={item.id} href={`#${item.id}`} className={`block py-1.5 transition-colors focus:outline-none relative -left-[21px] pl-[20px] border-l-2 ${activeAnchor === item.id ? "text-primary border-primary font-bold" : "text-muted-foreground hover:text-foreground border-transparent"}`}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </aside>
+
+          <div className="flex-1 max-w-4xl space-y-24 font-sans text-muted-foreground">
+            
+            {/* 01 - OVERVIEW */}
+            <section id="overview" className="space-y-6 scroll-mt-28 pt-4">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">01</span> Overview
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
+                <p>
+                  SkillSphere is a platform designed around practical skill exchange.
+                </p>
+                <p>
+                  Instead of treating people as permanently "teachers" or "learners", the platform allows users to specify what they can teach, what they want to learn, and what interests them. SkillSphere then helps discover potentially useful connections for practical knowledge exchange.
+                </p>
+              </div>
+            </section>
+
+            {/* 02 - THE PROBLEM */}
+            <section id="problem" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">02</span> The Problem
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
+                <p>
+                  Traditional learning platforms usually organize users around fixed roles: a teacher who broadcasts knowledge and a learner who consumes it. 
+                </p>
+                <p>
+                  But real people often have skills they can share while simultaneously wanting to learn something else. The problem is discovering these complementary relationships efficiently. It involves finding relevant people, determining whether their skills actually align, creating meaningful matches instead of simply displaying profiles, and providing a way for matched users to communicate natively.
+                </p>
+              </div>
+            </section>
+
+            {/* 03 - THE SOLUTION */}
+            <section id="solution" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">03</span> The Solution
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
+                <p>
+                  SkillSphere goes beyond a traditional teacher–learner model. Users describe both what they can teach and what they want to learn, while also sharing interests that help identify common ground.
+                </p>
+                <p>
+                  From there, the platform supports two distinct ways of discovering relevant connections.
+                </p>
+              </div>
+
+              <div className="space-y-12 my-12">
+                
+                {/* SECTION A: MUTUAL SKILL EXCHANGE */}
+                <div className="p-8 md:p-12 bg-background border border-border rounded-3xl shadow-sm relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(var(--foreground) 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
+                  <div className="relative z-10">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-6 border-b border-border/50 gap-4">
+                      <div>
+                        <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-1">01</span>
+                        <h3 className="font-heading font-bold text-xl text-foreground tracking-wide uppercase">Mutual Skill Exchange</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-medium md:max-w-[280px] md:text-right">
+                        Find someone whose skills complement what you want to learn.
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                      {/* USER A */}
+                      <div className="flex flex-col items-center gap-6 w-32">
+                        <div className="font-bold text-foreground tracking-widest text-sm">USER A</div>
+                        <div className="flex flex-col items-center w-full gap-4">
+                          <div className="w-full text-center">
+                            <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-2">CAN TEACH</span>
+                            <span className="text-primary font-mono bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20 block text-sm">Python</span>
+                          </div>
+                          <div className="w-full text-center">
+                            <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-2">WANTS TO LEARN</span>
+                            <span className="text-emerald-600 font-mono bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 block text-sm">SQL</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* EXCHANGE FLOW */}
+                      <div className="flex flex-col items-center justify-center gap-8 w-full max-w-[200px]">
+                        <ArrowRight className="text-muted-foreground/30 rotate-90 md:rotate-0" size={24} />
+                        <div className="text-center w-full">
+                          <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Mutual Skill Exchange</div>
+                          <div className="flex items-center justify-center gap-3 bg-secondary/50 py-3 px-4 rounded-xl border border-border">
+                            <span className="font-mono font-bold text-primary">Python</span>
+                            <Share2 size={16} className="text-muted-foreground" />
+                            <span className="font-mono font-bold text-emerald-600">SQL</span>
+                          </div>
+                        </div>
+                        <ArrowRight className="text-muted-foreground/30 rotate-90 md:rotate-0" size={24} />
+                      </div>
+
+                      {/* USER B */}
+                      <div className="flex flex-col items-center gap-6 w-32">
+                        <div className="font-bold text-foreground tracking-widest text-sm">USER B</div>
+                        <div className="flex flex-col items-center w-full gap-4">
+                          <div className="w-full text-center">
+                            <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-2">CAN TEACH</span>
+                            <span className="text-emerald-600 font-mono bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 block text-sm">SQL</span>
+                          </div>
+                          <div className="w-full text-center">
+                            <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-2">WANTS TO LEARN</span>
+                            <span className="text-primary font-mono bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20 block text-sm">Python</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-12 text-center text-sm font-medium text-foreground bg-secondary/30 py-3 px-6 rounded-lg mx-auto border border-border flex flex-col items-center max-w-[200px]">
+                      <span className="block mb-1">A can teach B Python</span>
+                      <span className="block">B can teach A SQL</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SECTION B: COMMON INTERESTS */}
+                <div className="p-8 md:p-12 bg-background border border-border rounded-3xl shadow-sm relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(var(--foreground) 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
+                  <div className="relative z-10">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-6 border-b border-border/50 gap-4">
+                      <div>
+                        <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-1">02</span>
+                        <h3 className="font-heading font-bold text-xl text-foreground tracking-wide uppercase">Common Interests</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-medium md:max-w-[280px] md:text-right">
+                        Find people who share interests with you.
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-16">
+                      {/* USER A */}
+                      <div className="flex flex-col items-center gap-6 w-40">
+                        <div className="font-bold text-foreground tracking-widest text-sm">USER A</div>
+                        <div className="w-full text-center">
+                          <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-3">INTERESTS</span>
+                          <div className="flex flex-col gap-2">
+                            <span className="bg-primary/5 text-primary border border-primary/20 px-3 py-1.5 rounded-md font-mono text-xs">Technology</span>
+                            <span className="bg-primary/5 text-primary border border-primary/20 px-3 py-1.5 rounded-md font-mono text-xs">Chess</span>
+                            <span className="bg-secondary/50 text-muted-foreground border border-border px-3 py-1.5 rounded-md font-mono text-xs">Startups</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* EXCHANGE FLOW */}
+                      <div className="flex flex-col items-center justify-center gap-8 w-full max-w-[200px] mt-12 md:mt-16">
+                        <div className="flex justify-center gap-4 text-muted-foreground/30">
+                          <ArrowRight className="rotate-90 md:rotate-45" size={24} />
+                          <ArrowLeft className="rotate-90 md:-rotate-45 hidden md:block" size={24} />
+                        </div>
+                        <div className="text-center w-full">
+                          <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Shared Interests</div>
+                          <div className="flex flex-col items-center justify-center gap-2 bg-secondary/50 py-4 px-6 rounded-xl border border-border">
+                            <span className="font-mono font-bold text-foreground">Technology</span>
+                            <span className="font-mono font-bold text-foreground">+</span>
+                            <span className="font-mono font-bold text-foreground">Chess</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* USER B */}
+                      <div className="flex flex-col items-center gap-6 w-40">
+                        <div className="font-bold text-foreground tracking-widest text-sm">USER B</div>
+                        <div className="w-full text-center">
+                          <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest block mb-3">INTERESTS</span>
+                          <div className="flex flex-col gap-2">
+                            <span className="bg-primary/5 text-primary border border-primary/20 px-3 py-1.5 rounded-md font-mono text-xs">Technology</span>
+                            <span className="bg-primary/5 text-primary border border-primary/20 px-3 py-1.5 rounded-md font-mono text-xs">Chess</span>
+                            <span className="bg-secondary/50 text-muted-foreground border border-border px-3 py-1.5 rounded-md font-mono text-xs">Photography</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-12 text-center text-sm font-medium text-foreground bg-secondary/30 py-3 px-6 rounded-lg inline-block mx-auto border border-border flex flex-col items-center max-w-[250px]">
+                      <p>Common ground for connection</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground mt-8 p-6 border-l-2 border-primary bg-primary/5 rounded-r-xl">
+                <p>
+                  <strong>MUTUAL SKILL EXCHANGE</strong> is based on complementary learning and teaching preferences, while <strong>COMMON INTERESTS</strong> is based on overlapping interests.
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  A person can discover another user because their skills complement each other, OR because they share interests, OR potentially both. They are distinct discovery paths.
+                </p>
+              </div>
+            </section>
+
+            {/* 04 - WHY INTERESTS MATTER */}
+            <section id="why-interests" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">04</span> Why Common Interests Matter
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
+                <p>
+                  Skills explain what two people can exchange. Shared interests provide another reason they may want to connect.
+                </p>
+                <p>
+                  This distinction is important. Someone may not have a reciprocal skill relationship with another person but may still discover them through shared interests. This provides an easier starting point for communication, making the platform useful beyond a strict teacher–student pairing.
+                </p>
+              </div>
+            </section>
+
+            {/* 05 - PRACTICAL VALUE */}
+            <section id="practical-value" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">05</span> Practical Value
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground pb-4">
+                <p>
+                  SkillSphere is intended to encourage practical knowledge exchange rather than only passive learning. By shifting the model from simply consuming lectures to real interaction, one-to-one knowledge exchange creates opportunities to practice soft skills.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "Explaining", desc: "Teaching someone requires turning what you know into an explanation another person can understand." },
+                  { title: "Communication", desc: "One-to-one interaction creates practice in asking questions, listening, responding, and communicating clearly." },
+                  { title: "Storytelling", desc: "Explaining a concept often requires examples, analogies, and stories rather than simply repeating definitions." },
+                  { title: "Adaptability", desc: "Different people understand things differently. Teaching requires adjusting how you explain something based on the person you're speaking with." },
+                  { title: "Confidence", desc: "Repeatedly explaining ideas and having real conversations can help users become more comfortable communicating their knowledge." },
+                  { title: "Practical Learning", desc: "The exchange is centered around doing, discussing, explaining, and applying knowledge rather than only consuming lectures." }
+                ].map((val, i) => (
+                  <div key={i} className="p-6 bg-secondary/20 border border-border rounded-2xl space-y-3">
+                    <h3 className="font-heading font-bold text-lg text-foreground">{val.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{val.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground pt-4">
+                <p>
+                  By facilitating direct peer interactions, the platform can reduce the friction of finding someone to learn from and can make learning more focused and interactive.
+                </p>
+              </div>
+            </section>
+
+            {/* 06 - WHY I BUILT IT THIS WAY */}
+            <section id="why-i-built" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">06</span> Why I Built It This Way
+              </h2>
+              <div className="space-y-4 text-base md:text-lg leading-relaxed text-foreground">
+                <p>
+                  I wanted the platform to encourage people to learn through interaction rather than only consuming information.
+                </p>
+                <p>
+                  Teaching something forces a person to organize their own understanding, explain ideas clearly, respond to questions, and adapt the explanation to another person's level. At the same time, the learner gets an opportunity to ask questions and learn through a real conversation rather than only following a predefined lesson.
+                </p>
+              </div>
+            </section>
+
+            {/* 07 - OBJECTIVES */}
+            <section id="objectives" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">07</span> Objectives
+              </h2>
+              <ul className="space-y-4">
+                {[
+                  "Enable reciprocal skill exchange within a local neighborhood or platform.",
+                  "Discover potentially compatible people through skills and shared interests.",
+                  "Encourage practical, interactive learning.",
+                  "Provide a space for one-to-one knowledge exchange.",
+                  "Support communication and peer learning."
+                ].map((obj, i) => (
+                  <li key={i} className="flex gap-4 p-5 bg-background border border-border rounded-xl shadow-sm">
+                    <CheckCircle className="text-primary shrink-0 w-6 h-6" />
+                    <p className="text-base text-foreground font-medium">{obj}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* 08 - KEY FEATURES */}
+            <section id="features" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">08</span> Key Features
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "01 \u2014 Mutual Skill Exchange", desc: "Users specify the exact skills they can teach and the skills they wish to learn, allowing discovery of complementary partners." },
+                  { title: "02 \u2014 Common Interests", desc: "Users specify personal interests alongside skills, allowing the platform to identify shared interests between potential connections." },
+                  { title: "03 \u2014 Skill Matching", desc: "The system algorithmically evaluates users based on their respective teaching and learning lists." },
+                  { title: "04 \u2014 User Profiles", desc: "Comprehensive profiles allow users to represent their expertise, interests, and goals securely." },
+                  { title: "05 \u2014 Communication", desc: "Matched users can initiate direct chat channels to communicate natively within the platform." }
+                ].map((feat, i) => (
+                  <div key={i} className="p-6 bg-secondary/20 border border-border rounded-2xl space-y-3">
+                    <h3 className="font-heading font-bold text-lg text-foreground">{feat.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 09 - TECH STACK */}
+            <section id="tech-stack" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">09</span> Tech Stack
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Frontend / Templates</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">Django Templates</p>
+                    <p className="text-sm text-muted-foreground">HTML, CSS, JavaScript</p>
+                  </div>
+                </div>
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Backend</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">Python</p>
+                    <p className="text-sm text-muted-foreground">Django</p>
+                  </div>
+                </div>
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Database / ORM</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">PostgreSQL</p>
+                    <p className="text-sm text-muted-foreground">Django ORM</p>
+                  </div>
+                </div>
+                <div className="p-6 bg-background border border-border rounded-xl">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-4">Authentication</span>
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground text-lg">Django Sessions</p>
+                    <p className="text-sm text-muted-foreground">Built-in Auth Framework</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 10 - SYSTEM ARCHITECTURE */}
+            <section id="architecture" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">10</span> System Architecture
+              </h2>
+              
+              <div className="p-8 bg-secondary/30 rounded-2xl border border-border mb-8 overflow-x-auto">
+                <div className="flex flex-col items-center min-w-[400px]">
+                  <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-64 text-center">User (Browser)</div>
+                  <div className="h-6 border-l-2 border-dashed border-primary/50 relative">
+                    <span className="absolute top-1/2 -translate-y-1/2 left-4 text-xs font-mono font-bold text-muted-foreground whitespace-nowrap">HTTP Requests</span>
+                  </div>
+                  
+                  <div className="border border-border bg-background p-6 rounded-xl w-full max-w-md shadow-sm relative">
+                    <div className="absolute -top-3 left-6 bg-secondary px-2 text-[10px] font-bold text-primary uppercase tracking-widest border border-border rounded">Django Monolith</div>
+                    
+                    <div className="flex flex-col gap-4 mt-2">
+                      <div className="px-6 py-3 bg-secondary/50 border border-border rounded-lg text-sm font-bold text-foreground text-center">Django Templates (Frontend)</div>
+                      <div className="h-4 border-l-2 border-dashed border-primary/30 mx-auto"></div>
+                      
+                      <div className="flex gap-4 w-full">
+                        <div className="px-4 py-3 bg-secondary/50 border border-border rounded-lg text-sm font-bold text-foreground text-center flex-1">Auth / Business Logic</div>
+                        <div className="px-4 py-3 bg-secondary/50 border border-border rounded-lg text-sm font-bold text-foreground text-center flex-1">Discovery System</div>
+                      </div>
+                      
+                      <div className="h-4 border-l-2 border-dashed border-primary/30 mx-auto"></div>
+                      <div className="px-6 py-3 bg-secondary/50 border border-border rounded-lg text-sm font-bold text-foreground text-center">Django ORM</div>
+                    </div>
+                  </div>
+                  
+                  <div className="h-6 border-l-2 border-dashed border-primary/50 relative">
+                    <span className="absolute top-1/2 -translate-y-1/2 left-4 text-xs font-mono font-bold text-muted-foreground whitespace-nowrap">SQL Queries</span>
+                  </div>
+                  <div className="px-6 py-3 bg-background border border-border rounded-lg shadow-sm font-bold text-foreground w-64 text-center flex justify-center gap-2 items-center"><DbIcon size={16} /> Database</div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Frontend (Templates)</div>
+                  <p className="text-base text-foreground leading-relaxed">Server-rendered HTML templates responsible for displaying profiles, dashboards, and the chat interface. Handles forms and UI interactions.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Business Logic & Auth</div>
+                  <p className="text-base text-foreground leading-relaxed">Manages session-based authentication, user profile updates, and standard view routing for the monolith.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Discovery System</div>
+                  <p className="text-base text-foreground leading-relaxed">A dedicated Python routine that scans profiles, scores relationships based on complementary taught/learned skills or overlapping interests, and stores valid matches.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 border-b border-border pb-4">
+                  <div className="w-48 shrink-0 font-bold text-foreground">Database & ORM</div>
+                  <p className="text-base text-foreground leading-relaxed">Stores relational mapping data including user bios, `skills_offered`, `skills_wanted`, `interests`, and chat messages using Django's ORM.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* 11 - WORKFLOW */}
+            <section id="workflow" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">11</span> Workflow
+              </h2>
+              
+              <div className="p-8 border border-border rounded-2xl bg-background space-y-2">
+                {[
+                  { label: "CREATE PROFILE", desc: "User registers and accesses their dashboard." },
+                  { label: "SELECT SKILLS & INTERESTS", desc: "User lists their expertise, what they want to learn, and personal interests." },
+                  { label: "SYSTEM DISCOVERS CONNECTIONS", desc: "Discovery algorithm executes, looking for complementary teach/learn overlaps alongside shared interests." },
+                  { label: "USER EXPLORES MATCHES", desc: "User views recommended connections based on skill exchange or common ground." },
+                  { label: "CONNECT / MESSAGE", desc: "User initiates a direct chat channel with another person." },
+                  { label: "KNOWLEDGE EXCHANGE", desc: "Both users communicate and collaborate." }
+                ].map((step, i, arr) => (
+                  <div key={i} className="flex flex-col">
+                    <div className="flex gap-6 items-start">
+                      <div className="mt-1 w-6 h-6 rounded-full bg-secondary flex items-center justify-center font-mono text-xs font-bold text-muted-foreground border border-border shrink-0">
+                        {i + 1}
+                      </div>
+                      <div>
+                        <div className="font-bold text-foreground">{step.label}</div>
+                        <div className="text-sm text-muted-foreground mt-1">{step.desc}</div>
+                      </div>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="h-6 w-px bg-border ml-3 my-1"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 12 - MATCHING LOGIC */}
+            <section id="matching-logic" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">12</span> Matching Logic
+              </h2>
+              <div className="space-y-6">
+                <p className="text-base md:text-lg leading-relaxed text-foreground">
+                  The system evaluates connections through two distinct mechanisms: strict reciprocal skills and overlapping personal interests.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-heading font-bold text-xl text-foreground border-b border-border pb-2">1. Mutual Skill Exchange</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Compares User A's skills to teach against User B's skills to learn, AND User B's skills to teach against User A's skills to learn.
+                  </p>
+                  <div className="p-6 bg-background border border-border rounded-xl shadow-sm">
+                    <div className="flex items-center gap-4 text-base font-mono mb-3">
+                      <div className="text-primary">User A (Teaches)</div>
+                      <ArrowRight className="text-muted-foreground shrink-0" size={14} />
+                      <div className="text-emerald-600">User B (Learns)</div>
+                    </div>
+                    <div className="flex items-center gap-4 text-base font-mono">
+                      <div className="text-primary">User A (Learns)</div>
+                      <ArrowLeft className="text-muted-foreground shrink-0" size={14} />
+                      <div className="text-emerald-600">User B (Teaches)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-heading font-bold text-xl text-foreground border-b border-border pb-2">2. Common Interests</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Compares the interests associated with users to provide a separate form of relevance.
+                  </p>
+                  <div className="p-6 bg-background border border-border rounded-xl shadow-sm space-y-4">
+                    <div className="flex gap-4 items-center">
+                      <div className="w-20 font-bold text-foreground">User A:</div>
+                      <div className="flex gap-2 text-xs font-mono">
+                        <span className="bg-primary/10 text-primary border border-primary/20 px-2 py-1 rounded">Technology</span>
+                        <span className="bg-primary/10 text-primary border border-primary/20 px-2 py-1 rounded">Chess</span>
+                        <span className="bg-secondary/50 text-muted-foreground border border-border px-2 py-1 rounded">Startups</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 items-center border-b border-border/50 pb-4">
+                      <div className="w-20 font-bold text-foreground">User B:</div>
+                      <div className="flex gap-2 text-xs font-mono">
+                        <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-1 rounded">Technology</span>
+                        <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-1 rounded">Chess</span>
+                        <span className="bg-secondary/50 text-muted-foreground border border-border px-2 py-1 rounded">Photography</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 items-center pt-2">
+                      <div className="w-20 font-bold text-foreground">Shared:</div>
+                      <div className="flex gap-2 text-xs font-mono">
+                        <span className="bg-foreground text-background px-3 py-1 rounded shadow-sm">Technology</span>
+                        <span className="bg-foreground text-background px-3 py-1 rounded shadow-sm">Chess</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 13 - WHAT I BUILT */}
+            <section id="what-i-built" className="space-y-8 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">13</span> What I Built
+              </h2>
+              <div className="space-y-6">
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Relational Logic Implementation</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Built the user and profile structure to correctly map teach/learn skill relationships and user interests using Django ORM.
+                  </p>
+                </div>
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Discovery System Implementation</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Implemented the discovery logic around these relationships in Python, adding separate algorithms to evaluate both skill overlap and interest-based connections.
+                  </p>
+                </div>
+                <div className="p-6 bg-secondary/20 border border-border rounded-xl space-y-3">
+                  <h3 className="font-heading font-bold text-lg text-foreground">Core Workflows</h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    Built authentication, role-based access, and direct communication functionality to connect matched users through the platform seamlessly.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* 14 - CHALLENGES & SOLUTIONS */}
+            <section id="challenges" className="space-y-12 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">14</span> Challenges & Solutions
+              </h2>
+
+              <div className="space-y-10">
+                <div className="space-y-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block border-b border-border/50 pb-2">CHALLENGE 01 \u2014 SLOW MATCH PERFORMANCE</span>
+                  <div className="space-y-4">
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-foreground">Problem:</strong> Large database queries nested inside calculation loops delayed discovery runs. Evaluating every user against every other user scaled extremely poorly as the profile count grew.</p>
+                    <p className="text-base text-foreground leading-relaxed"><strong className="text-emerald-600">Solution:</strong> Leveraged Django ORM <code>select_related</code> and <code>prefetch_related</code> statements to drastically reduce the N+1 query problem, fetching required user skill and interest data in bulk rather than individual loops.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 15 - WHAT I LEARNED */}
+            <section id="lessons" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">15</span> What I Learned
+              </h2>
+              <div className="p-8 bg-secondary/30 border border-border rounded-2xl">
+                <ul className="space-y-4">
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Matching is not always about finding identical attributes. Reciprocal relationships can be created by connecting what one person knows with what another wants to learn.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Product logic becomes clearer when different types of relevance (skills vs. interests) are modeled separately.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Building the platform helped me think about how user preferences translate into actual application logic, and I learned to design features around the user's reason for connecting rather than simply collecting data.</p>
+                  </li>
+                  <li className="flex gap-4 items-start">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <p className="text-base text-foreground">Understanding how ORM query behavior affects application performance, specifically dealing with N+1 bottlenecks in algorithmic loops.</p>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            {/* 16 - FUTURE SCOPE */}
+            <section id="future" className="space-y-6 scroll-mt-28">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground pb-2 flex items-center gap-3">
+                <span className="text-primary font-mono text-2xl">16</span> Future Scope
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  "Incorporate native video call structures directly inside the matching channels.",
+                  "Develop smarter personalized learning recommendations based on past successful pairings.",
+                  "Expand the reciprocal matching logic to accommodate group interactions or project-based teams."
+                ].map((imp, i) => (
+                  <div key={i} className="p-5 bg-background border border-border rounded-xl flex items-start gap-3">
+                    <ArrowRight className="w-4 h-4 text-primary mt-1 shrink-0" />
+                    <span className="text-sm text-foreground font-medium">{imp}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Optional Section 17: Related Projects */}
+            {related && related.length > 0 && (
+              <section id="related" className="space-y-8 scroll-mt-28 pt-12 border-t border-border">
+                <h2 className="font-heading font-bold text-2xl text-foreground tracking-tight">
+                  Related Projects
+                </h2>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {related.map((relProject) => (
+                    <Link
+                      key={relProject.id}
+                      href={`/projects/${relProject.slug}`}
+                      className="p-6 rounded-2xl bg-background border border-border hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md group"
+                    >
+                      <div className="space-y-3">
+                        <span className="text-[10px] font-mono font-bold text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest inline-block">
+                          {relProject.tags[0]}
+                        </span>
+                        <h4 className="font-heading font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                          {relProject.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground font-sans line-clamp-2 leading-relaxed">
+                          {relProject.description}
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary mt-6 self-end group-hover:translate-x-1 transition-transform">
+                        <span>Read Case Study</span>
+                        <ArrowRight size={14} />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
 
 
 export default function ProjectCaseStudyPage({ params }: { params: { slug: string } }) {
@@ -1787,6 +2437,10 @@ export default function ProjectCaseStudyPage({ params }: { params: { slug: strin
   if (slug === "zomato-analysis") {
     return <ZomatoCaseStudy project={project} related={related} />;
   }
+  if (slug === "skillsphere") {
+    return <SkillSphereCaseStudy project={project} related={related} />;
+  }
+
 
 
   // Intersection observer to track active header section

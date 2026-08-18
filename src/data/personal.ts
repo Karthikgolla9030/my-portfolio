@@ -17,7 +17,7 @@ export const personalInfo = {
     { label: "Projects Built", count: "10+" },
     { label: "Technologies", count: "15+" },
     { label: "Hours of Coding", count: "800+" },
-    { label: "Certifications", count: "5+" }
+    { label: "Certifications", count: "2" }
   ],
   focusAreas: [
     "AI & Machine Learning",

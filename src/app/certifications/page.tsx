@@ -37,7 +37,7 @@ function CertVisual({ title, issuer }: { title: string; issuer: string }) {
 
 export default function CertificationsPage() {
   const router = useRouter();
-  const categories = ["All", "Data Science", "AI/ML", "Cloud", "Others"];
+  const categories = ["All", "Data Analysis"];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredCerts = certifications.filter((cert) => {
@@ -130,7 +130,7 @@ export default function CertificationsPage() {
                     {cert.category}
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors">
-                    <span>View Case Study</span>
+                    <span>View Details</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>

@@ -34,7 +34,7 @@ function CertVisual({ title, issuer }: { title: string; issuer: string }) {
 }
 
 export function Certifications({ id }: { id?: string }) {
-  const categories = ["All", "Data Science", "AI/ML", "Cloud", "Others"];
+  const categories = ["All", "Data Analysis"];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredCerts = certifications.filter((cert) => {
