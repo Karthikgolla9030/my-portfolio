@@ -23,10 +23,18 @@ export async function POST(req: Request) {
     }
 
     // Check Environment Variables
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    const hasUser = !!process.env.EMAIL_USER;
+    const hasPass = !!process.env.EMAIL_PASS;
+    
+    // Safely log the keys that exist in process.env (filtering for EMAIL to see if there's a typo)
+    const envKeys = Object.keys(process.env).filter(key => key.includes('EMAIL'));
+    console.log('Diagnostic - EMAIL keys found in process.env:', envKeys);
+    console.log(`Diagnostic - hasUser: ${hasUser}, hasPass: ${hasPass}`);
+
+    if (!hasUser || !hasPass) {
       console.error('Server Configuration Error: Missing EMAIL_USER or EMAIL_PASS environment variables.');
       return NextResponse.json(
-        { error: 'Server is not configured to send emails.' },
+        { error: `Server is not configured to send emails. (User: ${hasUser}, Pass: ${hasPass})` },
         { status: 500 }
       );
     }
