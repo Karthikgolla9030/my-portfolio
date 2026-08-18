@@ -22,6 +22,15 @@ export async function POST(req: Request) {
       );
     }
 
+    // Check Environment Variables
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Server Configuration Error: Missing EMAIL_USER or EMAIL_PASS environment variables.');
+      return NextResponse.json(
+        { error: 'Server is not configured to send emails.' },
+        { status: 500 }
+      );
+    }
+
     // Configure Nodemailer transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -53,8 +62,8 @@ ${message}
       { message: 'Message sent successfully.' },
       { status: 200 }
     );
-  } catch (error) {
-    console.error('Contact API Error:', error);
+  } catch (error: any) {
+    console.error('Contact API Error:', error.message || error);
     return NextResponse.json(
       { error: 'Failed to send message. Please try again later.' },
       { status: 500 }
